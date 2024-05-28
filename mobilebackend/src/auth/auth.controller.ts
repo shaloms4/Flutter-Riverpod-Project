@@ -37,8 +37,14 @@ export class AuthController {
   
     
 
+    @UseGuards(JwtAuthGuard)
     @Post('logout')
-    logout() {}
+    async logout(@Body('token') token: string, @Body('userId') userId: number) {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem(userId.toString());
+  
+      return { message: 'Logout successful' };
+    }
 
    
 }
