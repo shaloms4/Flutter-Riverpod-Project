@@ -27,5 +27,3 @@ This project aims to provide a comprehensive platform for job seekers and employ
 | Shalom Habtamu  | UGR-6901-14   |
 | Tsion Melese    | UGR-1255-14   |
 ```
-
-
