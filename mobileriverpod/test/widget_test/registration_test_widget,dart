@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mobileriverpod/application/auth/provider/registration_riverpod_provider.dart';
+import 'package:mobileriverpod/domain/auth/model/registration_model.dart';
+import 'package:mobileriverpod/infrastructure/auth/repository/registration_repository.dart';
+
+// Import the widget to be tested
+import 'package:mobileriverpod/presentation/auth/registration_page.dart';
+
+class MockAuthRepository extends Mock implements AuthRepository {}
+
+void main() {
+  group('Registration Page Widget Tests', () {
+    late MockAuthRepository authRepository;
+
+    setUp(() {
+      authRepository = MockAuthRepository();
+    });
+
+    testWidgets('Registration Page UI Test', (WidgetTester tester) async {
+      // Build our app and trigger a frame
+      await tester.pumpWidget(
+        MaterialApp(
+          home: RegistrationPage(authRepository: authRepository),
+        ),
+      );
+
+      // Verify that the registration page contains necessary UI elements
+      expect(find.text('Register'), findsOneWidget);
+      expect(find.byType(TextFormField), findsNWidgets(5)); // Assuming 5 text form fields
+      expect(find.byType(ElevatedButton), findsOneWidget);
+    });
+
+    testWidgets('Registration Process Test', (WidgetTester tester) async {
+      final registrationData = RegistrationData(
+        email: 'test@example.com',
+        password: 'password',
+        username: 'testuser',
+        firstName: 'Test',
+        lastName: 'User',
+        role: Role.USER,
+      );
+
+      // Stub the register method of the mock repository to return the registrationData
+      when(authRepository.register(any)).thenAnswer((_) async => registrationData);
+
+      // Build our app and trigger a frame
+      await tester.pumpWidget(
+        MaterialApp(
+          home: RegistrationPage(authRepository: authRepository),
+        ),
+      );
+
+      // Simulate user input and tap the registration button
+      await tester.enterText(find.byKey(Key('email_field')), 'test@example.com');
+      await tester.enterText(find.byKey(Key('password_field')), 'password');
+      await tester.enterText(find.byKey(Key('username_field')), 'testuser');
+      await tester.enterText(find.byKey(Key('first_name_field')), 'Test');
+      await tester.enterText(find.byKey(Key('last_name_field')), 'User');
+      await tester.tap(find.byType(ElevatedButton));
+
+      // Wait for the registration process to complete
+      await tester.pumpAndSettle();
+
+      // Verify that the registration was successful
+      expect(find.text('Registration Successful'), findsOneWidget);
+    });
+  });
+}
