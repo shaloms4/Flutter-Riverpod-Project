@@ -85,13 +85,12 @@ class EditJobPage extends ConsumerWidget {
                 // Update the job
                 await updateJobNotifier.updateJob(job.jobId!, updatedJob);
 
-                // Navigate back to the job list page
-                // Navigate back to the job list page and trigger a refresh
+                // Invalidate providers to trigger refresh
                 ref.invalidate(jobNotifierProvider);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserPage()),
-                );
+                ref.invalidate(userJobNotifierProvider); // Invalidate userJobNotifierProvider as well
+
+                // Navigate back to the job list page
+                Navigator.pop(context, true); // Pass true to indicate changes were saved
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple[900], // Purple[900] button color

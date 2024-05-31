@@ -21,7 +21,6 @@ class AdminRegistrationPage extends StatelessWidget {
     );
   }
 }
-
 class RegistrationForm extends ConsumerWidget {
   const RegistrationForm({Key? key}) : super(key: key);
 
@@ -54,6 +53,7 @@ class RegistrationForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('email'),
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(
@@ -70,6 +70,7 @@ class RegistrationForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('password'),
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(
@@ -87,6 +88,7 @@ class RegistrationForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('username'),
                   decoration: InputDecoration(
                     labelText: 'Username',
                     border: OutlineInputBorder(
@@ -103,6 +105,7 @@ class RegistrationForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('firstName'),
                   decoration: InputDecoration(
                     labelText: 'First Name',
                     border: OutlineInputBorder(
@@ -119,6 +122,7 @@ class RegistrationForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('lastName'),
                   decoration: InputDecoration(
                     labelText: 'Last Name',
                     border: OutlineInputBorder(

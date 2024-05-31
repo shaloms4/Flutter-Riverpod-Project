@@ -66,6 +66,7 @@ class JobSeekerPage extends ConsumerWidget {
             return RefreshIndicator(
               onRefresh: () async {
                 await ref.read(EmployeejobNotifierProvider.notifier).getJobsForJobSeekers();
+                
               },
               child: ListView.builder(
                 itemCount: jobs.length,

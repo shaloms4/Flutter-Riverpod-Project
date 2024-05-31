@@ -11,7 +11,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mobileriverpod/presentation/view/job/user_job.dart';
 import 'package:mobileriverpod/presentation/view/review/user_review.dart';
 
-
 class UserPage extends ConsumerStatefulWidget {
   @override
   _UserPageState createState() => _UserPageState();
@@ -40,7 +39,6 @@ class _UserPageState extends ConsumerState<UserPage> {
                         fontSize: 24.0,
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -75,7 +73,8 @@ class _UserPageState extends ConsumerState<UserPage> {
           Icon(Icons.work, size: 30, color: Colors.white), // Employee Jobs
           Icon(Icons.person, size: 30, color: Colors.white), // Job Seeker
           Icon(Icons.add, size: 30, color: Colors.white), // Create Job
-          Icon(Icons.account_circle, size: 30, color: Colors.white), // User Profile
+          Icon(Icons.account_circle,
+              size: 30, color: Colors.white), // User Profile
         ],
         onTap: (index) {
           _pageController.jumpToPage(index);
@@ -175,17 +174,17 @@ class _UserPageState extends ConsumerState<UserPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '${userProfile.firstname?? 'N/A'} ${userProfile.lastname?? 'N/A'}',
+          '${userProfile.firstname ?? 'N/A'} ${userProfile.lastname ?? 'N/A'}',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         Text(
-          '${userProfile.email?? 'N/A'}',
+          '${userProfile.email ?? 'N/A'}',
           style: TextStyle(fontSize: 16),
         ),
         SizedBox(height: 8),
         Text(
-          'User ID: ${userProfile.userId?? 'N/A'}',
+          'User ID: ${userProfile.userId ?? 'N/A'}',
           style: TextStyle(fontSize: 16),
         ),
       ],
@@ -206,12 +205,17 @@ class _UserPageState extends ConsumerState<UserPage> {
               },
               child: Column(
                 children: [
-                  Icon(Icons.work, size: 20, color: _profileTabIndex == 0? Colors.black : Colors.grey),
+                  Icon(Icons.work,
+                      size: 20,
+                      color:
+                          _profileTabIndex == 0 ? Colors.black : Colors.grey),
                   Container(
                     margin: EdgeInsets.only(top: 4),
                     height: 2,
                     width: 40,
-                    color: _profileTabIndex == 0? Colors.purple : Colors.transparent,
+                    color: _profileTabIndex == 0
+                        ? Colors.purple
+                        : Colors.transparent,
                   )
                 ],
               ),
@@ -224,12 +228,17 @@ class _UserPageState extends ConsumerState<UserPage> {
               },
               child: Column(
                 children: [
-                  Icon(Icons.rate_review, size: 20, color: _profileTabIndex == 1? Colors.black : Colors.grey),
+                  Icon(Icons.rate_review,
+                      size: 20,
+                      color:
+                          _profileTabIndex == 1 ? Colors.black : Colors.grey),
                   Container(
                     margin: EdgeInsets.only(top: 4),
                     height: 2,
                     width: 40,
-                    color: _profileTabIndex == 1? Colors.purple : Colors.transparent,
+                    color: _profileTabIndex == 1
+                        ? Colors.purple
+                        : Colors.transparent,
                   ),
                 ],
               ),
@@ -250,8 +259,9 @@ class _UserPageState extends ConsumerState<UserPage> {
     return IndexedStack(
       index: _profileTabIndex,
       children: [
-        JobListPage(), // Display JobListPage
-        UserReviewsPage(), // Display UserReviewsPage
+         // Display UserReviewsPage
+        JobListPage(),
+        UserReviewsPage(), // Display JobListPage
       ],
     );
   }

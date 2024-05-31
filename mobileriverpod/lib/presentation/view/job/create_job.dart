@@ -165,7 +165,7 @@ class CreateJobForm extends ConsumerWidget {
                     await ref.read(jobNotifierProvider.notifier).createJob(job);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Job created successfully'),
+                        content: Text('created successfully'),
                         
                       ),
                     );

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobileriverpod/domain/auth/model/login_model.dart';
 import 'package:mobileriverpod/application/auth/provider/login_riverpod_provider.dart';
-import 'package:mobileriverpod/presentation/view/user/admin_user_list_page.dart';
-import 'package:mobileriverpod/presentation/view/user/user_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AdminLoginPage extends ConsumerWidget {

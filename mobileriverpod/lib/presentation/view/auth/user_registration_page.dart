@@ -12,7 +12,7 @@ class RegistrationPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            context.go('/login'); // Navigate back to the login page
+            context.go('/login'); 
           },
         ),
         title: Text('Registration'),

@@ -1,6 +1,6 @@
 enum Role {
   ADMIN,
-  USER,
+  USER, user,
 }
 
 class RegistrationData {

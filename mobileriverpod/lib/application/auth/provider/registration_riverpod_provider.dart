@@ -23,4 +23,6 @@ class RegistrationDataNotifier extends StateNotifier<RegistrationData> {
   void updateData(RegistrationData newData) {
     state = newData;
   }
+
+  
 }

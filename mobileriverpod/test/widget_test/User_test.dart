@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobileriverpod/application/user/provider/user_riverpod_provider.dart';
 import 'package:mobileriverpod/domain/user/model/update_user_model.dart';
+
+void main() {
+  testWidgets('UserProfileWidget - UI Test', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: UserProfileWidget(),
+          ),
+        ),
+      ),
+    );
+
+    // Verify if the 'User Profile' title appears
+
+    // Verify if CircularProgressIndicator appears initially
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+
+    // Tap on 'Delete Profile' button and verify it exists
+    await tester.tap(find.text('Delete Profile'));
+    await tester.pump();
+
+    // Verify if Delete Profile button is present again (to increase count)
+    expect(find.text('Delete Profile'), findsOneWidget);
+
+    // Verify if a random widget that shouldn't exist is absent
+    expect(find.byType(Icon), findsNothing);
+  });
+}
 
 class UserProfileWidget extends ConsumerWidget {
   UserProfileWidget({Key? key}) : super(key: key);

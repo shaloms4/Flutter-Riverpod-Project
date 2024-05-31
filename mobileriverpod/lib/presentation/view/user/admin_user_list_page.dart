@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobileriverpod/domain/user/model/user_model.dart';
 import 'package:mobileriverpod/application/user/provider/user_riverpod_provider.dart';
+import 'package:go_router/go_router.dart'; 
 
 class UserListPage extends ConsumerWidget {
   @override
@@ -32,6 +33,12 @@ class UserListPage extends ConsumerWidget {
         ),
         backgroundColor: Colors.white,
         toolbarHeight: 150, // Increase the height of the AppBar
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            context.go('/admin-login'); // Navigate to admin login using Go Router
+          },
+        ),
       ),
       body: Consumer(
         builder: (context, ref, _) {

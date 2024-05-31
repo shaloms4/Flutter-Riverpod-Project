@@ -52,6 +52,7 @@ class LoginForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 40), // Increased space between icon and input boxes
                 TextFormField(
+                  key: Key('emailField'), // Add key for email field
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(
@@ -68,6 +69,7 @@ class LoginForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  key: Key('passwordField'), // Add key for password field
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(
@@ -87,6 +89,7 @@ class LoginForm extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
+                    key: Key('loginButton'), // Add key for login button
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
@@ -107,6 +110,9 @@ class LoginForm extends ConsumerWidget {
                           context.go('/user');
                         } else {
                           // Handle unsuccessful login
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Login failed')),
+                          );
                         }
                       }
                     },
