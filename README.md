@@ -28,4 +28,4 @@ This project aims to provide a comprehensive platform for job seekers and employ
 | Tsion Melese    | UGR-1255-14   |
 ```
 
-You can copy this content and paste it into your `README.md` file on GitHub.
+
