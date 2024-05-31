@@ -28,10 +28,45 @@ class SeeAllReviewsPage extends StatelessWidget {
               itemCount: reviewsState.length,
               itemBuilder: (context, index) {
                 final review = reviewsState[index];
-                return ListTile(
-                  title: Text(review.content),
-                  subtitle: Text('Rate: ${review.rate}'),
-                  // Add more review details as needed
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  child: Card(
+                    color: Colors.purple[50],
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            review.content,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: List.generate(
+                              5,
+                              (index) => Icon(
+                                index < review.rate
+                                    ? Icons.star
+                                    : Icons.star_border,
+                                color: Colors.amber,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          // Add more review details as needed
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             );

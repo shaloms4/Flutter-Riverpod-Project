@@ -18,3 +18,23 @@ final authRepositoryProvider = FutureProvider<AuthRepository>((ref) async {
   final authDataProvider = ref.read(authDataProviderProvider);
   return AuthRepository(authDataProvider, sharedPreferences);
 });
+final logoutProvider =
+    StateNotifierProvider<LogoutNotifier, AsyncValue<void>>((ref) {
+  return LogoutNotifier();
+});
+
+class LogoutNotifier extends StateNotifier<AsyncValue<void>> {
+  LogoutNotifier() : super(const AsyncValue.data(null));
+
+  Future<void> logout() async {
+    state = const AsyncValue.loading();
+    try {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.remove('token');
+      await sharedPreferences.remove('userId');
+      state = const AsyncValue.data(null);
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+}
