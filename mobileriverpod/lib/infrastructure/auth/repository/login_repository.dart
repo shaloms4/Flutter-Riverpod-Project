@@ -24,4 +24,13 @@ class AuthRepository {
       return false;
     }
   }
+
+  Future<void> logout() async {
+    try {
+      await sharedPreferences.remove('token');
+      await sharedPreferences.remove('userId');
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

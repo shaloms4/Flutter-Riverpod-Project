@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobileriverpod/application/job/provider/job-riverpod_provider.dart';
 import 'package:mobileriverpod/presentation/view/review/create_review.dart';
 import 'package:mobileriverpod/application/user/provider/user_riverpod_provider.dart';
+import 'package:mobileriverpod/presentation/view/review/job_review.dart';
 
 class JobSeekerPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final jobState = ref.watch(EmployeejobNotifierProvider);
     final userId = ref.watch(userIdProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -23,9 +25,9 @@ class JobSeekerPage extends ConsumerWidget {
                 ),
               ),
               Container(
-                height: 1.0, // Thin line
-                color: Colors.grey[700], // Dark gray color
-                width: double.infinity, // Extend the line across the whole screen
+                height: 1.0,
+                color: Colors.grey[700],
+                width: double.infinity,
               ),
             ],
           ),
@@ -65,8 +67,9 @@ class JobSeekerPage extends ConsumerWidget {
           } else {
             return RefreshIndicator(
               onRefresh: () async {
-                await ref.read(EmployeejobNotifierProvider.notifier).getJobsForJobSeekers();
-                
+                await ref
+                    .read(EmployeejobNotifierProvider.notifier)
+                    .getJobsForJobSeekers();
               },
               child: ListView.builder(
                 itemCount: jobs.length,
@@ -80,13 +83,14 @@ class JobSeekerPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListTile(
-                            leading: Icon(Icons.person, color: Colors.black), // Job icon
+                            leading: Icon(Icons.person, color: Colors.black),
                             title: Text(
                               job.title,
                               style: TextStyle(fontWeight: FontWeight.bold),
-                            ), // Title
+                            ),
                             trailing: IconButton(
-                              icon: Icon(Icons.rate_review, color: Colors.purple[900]), // Review icon in purple[900]
+                              icon: Icon(Icons.rate_review,
+                                  color: Colors.purple[900]),
                               onPressed: () {
                                 showDialog(
                                   context: context,
@@ -99,7 +103,7 @@ class JobSeekerPage extends ConsumerWidget {
                             ),
                           ),
                           Divider(
-                            color: Colors.purple[900], // Horizontal line color set to purple[900]
+                            color: Colors.purple[900],
                             thickness: 2.0,
                             height: 2.0,
                             indent: 16.0,
@@ -111,12 +115,31 @@ class JobSeekerPage extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height: 8),
-                                Text('Phone Number: ${job.phonenumber}'), // Phone number
+                                Text('Phone Number: ${job.phonenumber}'),
                                 SizedBox(height: 4),
-                                Text('Description: ${job.description}'), // Description
+                                Text('Description: ${job.description}'),
                                 SizedBox(height: 4),
-                                Text('Salary: ${job.salary}'), // Salary
+                                Text('Salary: ${job.salary}'),
                                 SizedBox(height: 8),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SeeAllReviewsPage(
+                                          jobId: job.jobId!,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    "See all reviews",
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -136,4 +159,4 @@ class JobSeekerPage extends ConsumerWidget {
       ),
     );
   }
-  }
+}

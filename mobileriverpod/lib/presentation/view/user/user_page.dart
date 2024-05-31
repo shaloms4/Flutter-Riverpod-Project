@@ -259,9 +259,8 @@ class _UserPageState extends ConsumerState<UserPage> {
     return IndexedStack(
       index: _profileTabIndex,
       children: [
-         // Display UserReviewsPage
-        JobListPage(),
-        UserReviewsPage(), // Display JobListPage
+        UserReviewsPage(),
+        JobListPage(), // Display JobListPage
       ],
     );
   }
