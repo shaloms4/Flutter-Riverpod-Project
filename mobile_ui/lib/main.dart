@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
-          title: 'JOB HUB',
+          title: 'JOBHUB',
           initialRoute: '/',
           routes: {
             '/': (context) => LandingPage(),
