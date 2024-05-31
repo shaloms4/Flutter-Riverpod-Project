@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobileriverpod/domain/user/model/update_user_model.dart';
-import 'package:mobileriverpod/application/user/provider/user_riverpod_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobileriverpod/application/user/provider/user_riverpod_provider.dart';
+import 'package:mobileriverpod/domain/user/model/update_user_model.dart';
+
+import 'package:mobileriverpod/application/auth/provider/login_riverpod_provider.dart';
 
 class EditProfilePage extends ConsumerWidget {
   final TextEditingController firstNameController = TextEditingController();
@@ -72,27 +75,36 @@ class EditProfilePage extends ConsumerWidget {
                   TextFormField(
                     controller: firstNameController,
                     decoration: InputDecoration(labelText: 'First Name'),
-                    style: TextStyle(fontSize: 18), // Enlarge the font size of the input fields
+                    style: TextStyle(
+                        fontSize:
+                            18), // Enlarge the font size of the input fields
                   ),
                   TextFormField(
                     controller: lastNameController,
                     decoration: InputDecoration(labelText: 'Last Name'),
-                    style: TextStyle(fontSize: 18), // Enlarge the font size of the input fields
+                    style: TextStyle(
+                        fontSize:
+                            18), // Enlarge the font size of the input fields
                   ),
                   TextFormField(
                     controller: usernameController,
                     decoration: InputDecoration(labelText: 'Username'),
-                    style: TextStyle(fontSize: 18), // Enlarge the font size of the input fields
+                    style: TextStyle(
+                        fontSize:
+                            18), // Enlarge the font size of the input fields
                   ),
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(labelText: 'Email'),
                     readOnly: true, // Disable editing email
-                    style: TextStyle(fontSize: 18), // Enlarge the font size of the input fields
+                    style: TextStyle(
+                        fontSize:
+                            18), // Enlarge the font size of the input fields
                   ),
                   SizedBox(height: 20),
                   SizedBox(
-                    width: double.infinity, // Make the button extend to the full width
+                    width: double
+                        .infinity, // Make the button extend to the full width
                     child: ElevatedButton(
                       onPressed: () {
                         // Create UpdateUserDto from user input
@@ -106,10 +118,13 @@ class EditProfilePage extends ConsumerWidget {
                         ref.read(userProvider.notifier).updateUserProfile(dto);
                         context.go('/user'); // Return to the user page
                       },
-                      child: Text('Save', style: TextStyle(color: Colors.white)), // Set text color to white
+                      child: Text('Save',
+                          style: TextStyle(
+                              color: Colors.white)), // Set text color to white
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple[900],
-                        padding: EdgeInsets.symmetric(vertical: 16), // Enlarge the vertical padding
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16), // Enlarge the vertical padding
                       ),
                     ),
                   ),
@@ -124,7 +139,8 @@ class EditProfilePage extends ConsumerWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: Text('Logout?'),
-                                content: Text('Are you sure you want to logout from your account?'),
+                                content: Text(
+                                    'Are you sure you want to logout from your account?'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
@@ -133,11 +149,14 @@ class EditProfilePage extends ConsumerWidget {
                                     child: Text('Cancel'),
                                   ),
                                   TextButton(
-                                    onPressed: () {
-                                      final userNotifier = ref.read(userProvider.notifier);
-                                      userNotifier.deleteUserProfile();
-                                      Navigator.of(context).pop(); // Close the dialog
-                                      context.go('/'); // Redirect to landing page
+                                    onPressed: () async {
+                                      final logoutNotifier =
+                                          ref.read(logoutProvider.notifier);
+                                      await logoutNotifier.logout();
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                      context
+                                          .go('/'); // Redirect to landing page
                                     },
                                     child: Text('Logout'),
                                   ),
@@ -146,7 +165,10 @@ class EditProfilePage extends ConsumerWidget {
                             },
                           );
                         },
-                        child: Text('Logout', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                        child: Text('Logout',
+                            style: TextStyle(
+                                color: Colors.purple[900],
+                                fontWeight: FontWeight.bold)),
                       ),
                       TextButton(
                         onPressed: () {
@@ -155,7 +177,8 @@ class EditProfilePage extends ConsumerWidget {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 title: Text('Delete Account?'),
-                                content: Text('This action cannot be undone. Are you sure you want to delete your account?'),
+                                content: Text(
+                                    'This action cannot be undone. Are you sure you want to delete your account?'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
@@ -165,10 +188,13 @@ class EditProfilePage extends ConsumerWidget {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      final userNotifier = ref.read(userProvider.notifier);
+                                      final userNotifier =
+                                          ref.read(userProvider.notifier);
                                       userNotifier.deleteUserProfile();
-                                      Navigator.of(context).pop(); // Close the dialog
-                                      context.go('/'); // Redirect to landing page
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                      context
+                                          .go('/'); // Redirect to landing page
                                     },
                                     child: Text('Delete'),
                                   ),
@@ -177,7 +203,10 @@ class EditProfilePage extends ConsumerWidget {
                             },
                           );
                         },
-                        child: Text('Delete Account', style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+                        child: Text('Delete Account',
+                            style: TextStyle(
+                                color: Colors.purple[900],
+                                fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
