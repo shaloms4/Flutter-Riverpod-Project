@@ -2,6 +2,13 @@
 
 This project aims to provide a comprehensive platform for job seekers and employers to connect. It includes several key features to facilitate this interaction:
 
+
+## Built With
+
+- **Flutter:** A UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+- **Riverpod:** A state management library for Dart, used in this project for managing application state efficiently and robustly.
+
+
 ## Features
 
 - **Authentication:** Users can securely log in and out of the system.
