@@ -135,5 +135,9 @@ export class AuthService {
  
   
 
-  logout() {}
+async logout(token: string, userId: number) {
+  localStorage.removeItem('accessToken');
+  localStorage.remove(userId)
+  return { message: 'Logout successful' };
+}
 }
