@@ -9,8 +9,8 @@ class UserProfileWidget extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final userProfile = watch(userProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userProfile = ref.watch(userProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +64,9 @@ class UserProfileWidget extends ConsumerWidget {
                             firstname: userProfile.firstname,
                             lastname: userProfile.lastname,
                           );
-                          context.read(userProvider.notifier).updateUserProfile(updateDto);
+                          ref
+                              .read(userProvider.notifier)
+                              .updateUserProfile(updateDto);
                         }
                       },
                       child: Text('Update Profile'),
@@ -72,7 +74,7 @@ class UserProfileWidget extends ConsumerWidget {
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        context.read(userProvider.notifier).deleteUserProfile();
+                        ref.read(userProvider.notifier).deleteUserProfile();
                       },
                       child: Text('Delete Profile'),
                       style: ElevatedButton.styleFrom(primary: Colors.red),
